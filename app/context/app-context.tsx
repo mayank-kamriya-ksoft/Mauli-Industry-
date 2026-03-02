@@ -13,8 +13,9 @@ const DEFAULT_MENUS: Menu[] = [
       { id: "menu-2", label: "About Us", url: "/about", type: "page", order: 2, enabled: true },
       { id: "menu-3", label: "Products", url: "/products", type: "page", order: 3, enabled: true },
       { id: "menu-3b", label: "Services", url: "/services", type: "page", order: 4, enabled: true },
-      { id: "menu-4", label: "Clients", url: "/clients", type: "page", order: 4, enabled: true },
-      { id: "menu-5", label: "Contact", url: "/contact", type: "page", order: 5, enabled: true }
+      { id: "menu-6", label: "Infrastructure", url: "/infrastructure", type: "page", order: 5, enabled: true },
+      { id: "menu-4", label: "Clients", url: "/clients", type: "page", order: 6, enabled: true },
+      { id: "menu-5", label: "Contact", url: "/contact", type: "page", order: 7, enabled: true }
     ]
   },
   {

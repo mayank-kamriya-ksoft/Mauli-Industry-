@@ -8,9 +8,11 @@
   flex: 1;
 }
 
+/* HERO SECTION */
+
 .hero {
-  background: var(--color-primary, #1a1a2e);
-  color: var(--color-on-primary, #fff);
+  background: #1a1a2e;
+  color: #ffffff;
   padding: var(--space-9) var(--space-5);
   text-align: center;
 }
@@ -24,15 +26,25 @@
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: var(--space-3);
+
+  /* FIX invisible text */
+  color: #ffffff;
 }
 
 .heroSubtitle {
   font-size: 1.15rem;
-  opacity: 0.85;
+  opacity: 0.9;
+  color: #e5e7eb;
 }
+
+/* CONTENT SECTION */
 
 .content {
   padding: var(--space-9) var(--space-5);
+
+  /* Works in dark + light */
+  background: var(--color-background, #ffffff);
+  color: var(--color-text, #111827);
 }
 
 .container {
@@ -40,20 +52,31 @@
   margin: 0 auto;
 }
 
+/* TITLES */
+
 .sectionTitle {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: var(--space-2);
+
   text-decoration: underline;
   text-underline-offset: 6px;
+
+  /* visible both modes */
+  color: var(--color-text, #111827);
 }
 
 .designLabel {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: var(--space-6);
+
   text-decoration: underline;
+
+  color: var(--color-text, #111827);
 }
+
+/* TABLE */
 
 .tableWrapper {
   overflow-x: auto;
@@ -63,21 +86,31 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 1rem;
-  background: #ffffff;
-  color: #1a1a1a;
+
+  /* adaptive colors */
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text, #111827);
+
+  border: 1px solid var(--color-border, #d1d5db);
 }
+
+/* CELLS */
 
 .table th,
 .table td {
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-border, #d1d5db);
   padding: var(--space-3) var(--space-4);
   text-align: left;
 }
+
+/* HEADER */
 
 .table thead {
   background: #1a1a2e;
   color: #ffffff;
 }
+
+/* COLUMN WIDTH */
 
 .thSr {
   width: 80px;
@@ -85,11 +118,10 @@
 }
 
 .thMachine {
-  width: 200px;
+  width: 220px;
 }
 
 .thRange {
-  /* flex */
 }
 
 .thQty {
@@ -101,22 +133,31 @@
   text-align: center;
 }
 
+/* ROWS */
+
 .table tbody tr {
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text, #111827);
 }
 
+/* ALTERNATE ROW */
+
 .table tbody tr:nth-child(even) {
-  background: #f3f4f6;
+  background: var(--color-muted, #f3f4f6);
 }
+
+/* HOVER */
 
 .table tbody tr:hover {
   background: #e5e7eb;
 }
 
+/* MOBILE */
+
 @media (max-width: 600px) {
+
   .heroTitle {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
   }
 
   .sectionTitle {
@@ -131,51 +172,5 @@
   .table td {
     padding: var(--space-2) var(--space-3);
   }
-}
 
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1rem;
-
-  /* Auto adapt light/dark */
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
-
-  border: 1px solid var(--color-border, #d1d5db);
-}
-
-.table th,
-.table td {
-  border: 1px solid var(--color-border, #d1d5db);
-  padding: var(--space-3) var(--space-4);
-  text-align: left;
-}
-
-/* Header always dark */
-.table thead {
-  background: #1a1a2e;
-  color: #ffffff;
-}
-
-/* Rows */
-.table tbody tr {
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
-}
-
-/* Alternate rows */
-.table tbody tr:nth-child(even) {
-  background: var(--color-muted, #f3f4f6);
-}
-
-/* Hover */
-.table tbody tr:hover {
-  background: #e5e7eb;
-}
-.content {
-  padding: var(--space-9) var(--space-5);
-  background: var(--color-background, #ffffff);
-  color: var(--color-text, #111827);
 }
