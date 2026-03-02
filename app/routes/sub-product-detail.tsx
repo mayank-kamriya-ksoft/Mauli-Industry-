@@ -3,8 +3,16 @@ import { Header } from "~/components/header/header";
 import { Footer } from "~/components/footer/footer";
 import { ProductSidebar } from "~/components/product-sidebar/product-sidebar";
 import { productCategories } from "~/data/products";
+import { dbService } from "~/lib/services/database";
 import { ArrowLeft } from "lucide-react";
+import type { Route } from "./+types/sub-product-detail";
 import styles from "./sub-product-detail.module.css";
+
+export async function loader({ params }: Route.LoaderArgs) {
+  // Use cached products - no extra API hit if already fetched
+  const products = await dbService.getProducts();
+  return { products, paramId: params.id, paramSubId: params.subId };
+}
 
 export function meta({ params }: { params: { id: string; subId: string } }) {
   const product = productCategories.find((p) => p.id === params.id);
@@ -18,8 +26,8 @@ export function meta({ params }: { params: { id: string; subId: string } }) {
   ];
 }
 
-export default function SubProductDetail() {
-  const { id, subId } = useParams();
+export default function SubProductDetail({ loaderData }: Route.ComponentProps) {
+  const { paramId: id, paramSubId: subId } = loaderData;
   const product = productCategories.find((p) => p.id === id);
   const sub = product?.subProducts?.find((s) => s.id === subId);
 
