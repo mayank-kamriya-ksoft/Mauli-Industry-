@@ -21,7 +21,7 @@ export const companyInfo = {
     vision:
       "To become India's most trusted and innovative industrial engineering partner for steel and heavy machinery sectors.",
     history:
-      "Founded in Aurangabad, Mauli Industries has grown from a small tool room to a PAN-India supplier with strong technical expertise and long-term customer trust.",
+      "Founded in Chhatrapati Sambhaji Nagar, Mauli Industries has grown from a small tool room to a PAN-India supplier with strong technical expertise and long-term customer trust.",
   },
   certifications: ["ISO 9001:2015"],
 };
