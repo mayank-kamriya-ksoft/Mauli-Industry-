@@ -41,7 +41,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Contact({ loaderData }: Route.ComponentProps) {
+export default function Contact({ loaderData, actionData }: Route.ComponentProps) {
   const { company, pages } = loaderData;
   const contactPage = pages.find((p: any) => p.slug === 'contact' && p.status === 'published');
 
@@ -146,7 +146,7 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
           <p className={styles.formSubtitle}>Fill out the form below and we'll get back to you soon</p>
           
           <form className={styles.form} method="post">
-            {loaderData?.success && (
+            {actionData?.success && (
               <div style={{ padding: '1rem', backgroundColor: '#dcfce7', color: '#166534', borderRadius: '0.5rem', marginBottom: '1rem' }}>
                 Thank you! Your message has been sent successfully.
               </div>

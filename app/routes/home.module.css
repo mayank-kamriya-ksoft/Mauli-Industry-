@@ -5,8 +5,8 @@
 }
 
 .hero {
-  background: linear-gradient(160deg, var(--color-brand-12) 0%, var(--color-brand-11) 40%, var(--color-brand-9) 100%);
-  color: var(--color-brand-1);
+  background: linear-gradient(160deg, var(--color-neutral-12) 0%, var(--color-neutral-12) 50%, var(--color-neutral-11) 100%);
+  color: var(--color-neutral-1);
   padding: var(--space-9) var(--space-5);
   text-align: center;
   position: relative;
@@ -18,8 +18,9 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 80%, light-dark(rgba(255,255,255,0.05), rgba(255,255,255,0.03)) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, light-dark(rgba(255,255,255,0.08), rgba(255,255,255,0.04)) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, var(--color-brand-9) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--color-brand-9) 0%, transparent 50%);
+  opacity: 0.06;
   pointer-events: none;
 }
 
@@ -37,7 +38,7 @@
   line-height: 1.08;
   letter-spacing: -0.025em;
   margin-bottom: var(--space-4);
-  color: var(--color-brand-1);
+  color: var(--color-neutral-1);
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -48,7 +49,7 @@
   line-height: 1.35;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-3);
-  color: var(--color-brand-2);
+  color: var(--color-brand-9);
   opacity: 0.92;
 }
 
@@ -59,7 +60,7 @@
   line-height: 1.75;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-7);
-  color: var(--color-brand-3);
+  color: var(--color-neutral-5);
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
@@ -73,13 +74,13 @@
 }
 
 .heroButtons a[class*="outline"] {
-  color: var(--color-brand-1);
-  border-color: var(--color-brand-3);
+  color: var(--color-neutral-1);
+  border-color: var(--color-neutral-6);
 }
 
 .heroButtons a[class*="outline"]:hover {
-  background-color: light-dark(rgba(255,255,255,0.15), rgba(255,255,255,0.1));
-  color: var(--color-brand-1);
+  background-color: rgba(255,255,255,0.1);
+  color: var(--color-neutral-1);
 }
 
 .section {

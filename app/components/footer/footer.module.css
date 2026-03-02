@@ -1,6 +1,6 @@
 .footer {
-  background: linear-gradient(180deg, var(--color-brand-12) 0%, light-dark(#0c1222, #080d18) 100%);
-  color: var(--color-brand-1);
+  background: linear-gradient(180deg, var(--color-neutral-12) 0%, var(--color-neutral-12) 100%);
+  color: var(--color-neutral-1);
   padding: var(--space-9) 0 var(--space-5);
   margin-top: auto;
 }
@@ -40,7 +40,7 @@
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.7;
-  color: light-dark(#94a3b8, #64748b);
+  color: var(--color-neutral-6);
 }
 
 .contactItem {
@@ -51,7 +51,7 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  color: light-dark(#94a3b8, #64748b);
+  color: var(--color-neutral-6);
 }
 
 .contactIcon {
@@ -72,7 +72,7 @@
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 400;
-  color: light-dark(#94a3b8, #64748b);
+  color: var(--color-neutral-6);
   text-decoration: none;
   transition: all 0.2s var(--ease);
 }
@@ -83,7 +83,7 @@
 }
 
 .bottom {
-  border-top: var(--border-size-1) solid light-dark(rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border-top: var(--border-size-1) solid var(--color-neutral-10);
   padding-top: var(--space-5);
   display: flex;
   justify-content: space-between;
@@ -97,7 +97,7 @@
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: light-dark(#475569, #334155);
+  color: var(--color-neutral-8);
 }
 
 .credit {
@@ -105,7 +105,7 @@
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: light-dark(#475569, #334155);
+  color: var(--color-neutral-8);
 }
 
 .creditLink {
@@ -152,10 +152,10 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-round);
-  background: light-dark(rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-  color: light-dark(#94a3b8, #64748b);
+  background: var(--color-neutral-11);
+  color: var(--color-neutral-6);
   transition: all 0.2s ease;
-  border: 1px solid light-dark(rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+  border: 1px solid var(--color-neutral-10);
 }
 
 .socialLink:hover {
