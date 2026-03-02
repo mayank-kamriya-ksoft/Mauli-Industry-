@@ -8,49 +8,46 @@
   flex: 1;
 }
 
-/* HERO SECTION */
+/* HERO */
 
 .hero {
-  background: #1a1a2e;
-  color: #ffffff;
+  background: linear-gradient(135deg,#1a1a2e,#0f172a);
+  color: white;
   padding: var(--space-9) var(--space-5);
   text-align: center;
 }
 
 .heroContent {
   max-width: 800px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .heroTitle {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: var(--space-3);
-
-  /* FIX invisible text */
-  color: #ffffff;
+  color: white;
 }
 
 .heroSubtitle {
   font-size: 1.15rem;
   opacity: 0.9;
-  color: #e5e7eb;
+  color: #d1d5db;
 }
 
-/* CONTENT SECTION */
+
+/* CONTENT */
 
 .content {
   padding: var(--space-9) var(--space-5);
-
-  /* Works in dark + light */
-  background: var(--color-background, #ffffff);
-  color: var(--color-text, #111827);
+  background: var(--color-background,#ffffff);
 }
 
 .container {
-  max-width: 960px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: auto;
 }
+
 
 /* TITLES */
 
@@ -58,119 +55,203 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: var(--space-2);
-
   text-decoration: underline;
   text-underline-offset: 6px;
-
-  /* visible both modes */
-  color: var(--color-text, #111827);
+  color: var(--color-text,#111827);
 }
 
 .designLabel {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: var(--space-6);
-
   text-decoration: underline;
-
-  color: var(--color-text, #111827);
+  color: var(--color-text,#111827);
 }
+
 
 /* TABLE */
 
 .tableWrapper {
-  overflow-x: auto;
+  overflow-x:auto;
 }
+
+
+/* MAIN TABLE */
 
 .table {
-  width: 100%;
+
+  width:100%;
   border-collapse: collapse;
-  font-size: 1rem;
+  font-size:1rem;
 
-  /* adaptive colors */
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  border-radius:8px;
+  overflow:hidden;
 
-  border: 1px solid var(--color-border, #d1d5db);
+  /* LIGHT MODE */
+  background:#ffffff;
+  color:#111827;
+  border:1px solid #e5e7eb;
+
 }
+
+
+/* HEADER */
+
+.table thead {
+
+  background:#E37D1B;
+  color:white;
+
+  font-weight:600;
+
+}
+
 
 /* CELLS */
 
 .table th,
 .table td {
-  border: 1px solid var(--color-border, #d1d5db);
-  padding: var(--space-3) var(--space-4);
-  text-align: left;
+
+  border:1px solid #e5e7eb;
+  padding:14px 16px;
+  text-align:left;
+
 }
 
-/* HEADER */
-
-.table thead {
-  background: #1a1a2e;
-  color: #ffffff;
-}
 
 /* COLUMN WIDTH */
 
-.thSr {
-  width: 80px;
-  text-align: center;
+.thSr{
+  width:80px;
+  text-align:center;
 }
 
-.thMachine {
-  width: 220px;
+.thMachine{
+  width:220px;
 }
 
-.thRange {
+.thQty{
+  width:80px;
+  text-align:center;
 }
 
-.thQty {
-  width: 70px;
-  text-align: center;
+.tdCenter{
+  text-align:center;
 }
 
-.tdCenter {
-  text-align: center;
+
+
+/* LIGHT MODE ROWS */
+
+.table tbody tr{
+  background:white;
 }
+
+.table tbody tr:nth-child(even){
+  background:#f9fafb;
+}
+
+.table tbody tr:hover{
+  background:#fff4e6;
+}
+
+
+
+/* ===================== */
+/* DARK MODE */
+/* ===================== */
+
+@media (prefers-color-scheme: dark){
+
+.content{
+  background:#0b0f19;
+}
+
+
+/* DARK TABLE */
+
+.table{
+
+  background:#111827;
+  color:#e5e7eb;
+  border:1px solid #2d3748;
+
+}
+
+
+/* HEADER */
+
+.table thead{
+
+  background:#E37D1B;
+  color:white;
+
+}
+
+
+/* CELLS */
+
+.table th,
+.table td{
+
+  border:1px solid #2d3748;
+
+}
+
 
 /* ROWS */
 
-.table tbody tr {
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+.table tbody tr{
+
+  background:#111827;
+
 }
 
-/* ALTERNATE ROW */
+.table tbody tr:nth-child(even){
 
-.table tbody tr:nth-child(even) {
-  background: var(--color-muted, #f3f4f6);
+  background:#1f2937;
+
 }
 
-/* HOVER */
+.table tbody tr:hover{
 
-.table tbody tr:hover {
-  background: #e5e7eb;
+  background:#2a3443;
+
 }
+
+
+/* TITLES */
+
+.sectionTitle,
+.designLabel{
+
+color:#f3f4f6;
+
+}
+
+}
+
+
 
 /* MOBILE */
 
-@media (max-width: 600px) {
+@media(max-width:600px){
 
-  .heroTitle {
-    font-size: 1.8rem;
-  }
+.heroTitle{
+font-size:1.8rem;
+}
 
-  .sectionTitle {
-    font-size: 1.5rem;
-  }
+.sectionTitle{
+font-size:1.5rem;
+}
 
-  .table {
-    font-size: 0.875rem;
-  }
+.table{
+font-size:0.9rem;
+}
 
-  .table th,
-  .table td {
-    padding: var(--space-2) var(--space-3);
-  }
+.table th,
+.table td{
+padding:10px;
+}
 
 }
