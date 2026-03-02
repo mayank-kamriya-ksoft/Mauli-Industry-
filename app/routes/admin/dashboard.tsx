@@ -37,6 +37,7 @@ import { Card } from "../../components/ui/card/card";
 import { RichTextEditor } from "../../components/ui/rich-text-editor/rich-text-editor";
 import { AppearanceSettings } from "../../components/admin/appearance-settings";
 import { SettingsPanel } from "../../components/admin/settings-panel";
+import { ImageUpload } from "../../components/admin/image-upload";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs/tabs";
 import { Badge } from "../../components/ui/badge/badge";
 import styles from "./dashboard.module.css";
@@ -506,10 +507,11 @@ export default function Dashboard() {
                         />
                       </div>
                       <div className={styles.formGroup} style={{ gridColumn: "1 / -1" }}>
-                        <label>Image URL</label>
-                        <Input
+                        <ImageUpload
+                          label="Product Image"
                           value={productForm.image}
-                          onChange={(e) => setProductForm({ ...productForm, image: e.target.value })}
+                          onChange={(url) => setProductForm({ ...productForm, image: url })}
+                          folder="mauli-cms/products"
                         />
                       </div>
                     </div>
@@ -555,10 +557,11 @@ export default function Dashboard() {
                           />
                         </div>
                         <div className={styles.formGroup}>
-                          <label>Image URL</label>
-                          <Input
+                          <ImageUpload
+                            label="Product Image"
                             value={productForm.image}
-                            onChange={(e) => setProductForm({ ...productForm, image: e.target.value })}
+                            onChange={(url) => setProductForm({ ...productForm, image: url })}
+                            folder="mauli-cms/products"
                           />
                         </div>
                         <div className={styles.formActions}>
@@ -637,10 +640,11 @@ export default function Dashboard() {
                         />
                       </div>
                       <div className={styles.formGroup} style={{ gridColumn: "1 / -1" }}>
-                        <label>Logo URL</label>
-                        <Input
+                        <ImageUpload
+                          label="Client Logo"
                           value={clientForm.logo}
-                          onChange={(e) => setClientForm({ ...clientForm, logo: e.target.value })}
+                          onChange={(url) => setClientForm({ ...clientForm, logo: url })}
+                          folder="mauli-cms/clients"
                         />
                       </div>
                     </div>
@@ -671,10 +675,11 @@ export default function Dashboard() {
                           />
                         </div>
                         <div className={styles.formGroup}>
-                          <label>Logo URL</label>
-                          <Input
+                          <ImageUpload
+                            label="Client Logo"
                             value={clientForm.logo}
-                            onChange={(e) => setClientForm({ ...clientForm, logo: e.target.value })}
+                            onChange={(url) => setClientForm({ ...clientForm, logo: url })}
+                            folder="mauli-cms/clients"
                           />
                         </div>
                         <div className={styles.formActions}>
@@ -778,11 +783,11 @@ export default function Dashboard() {
                         </select>
                       </div>
                       <div className={styles.formGroup}>
-                        <label>Featured Image URL</label>
-                        <Input
+                        <ImageUpload
+                          label="Featured Image"
                           value={pageForm.featured_image}
-                          onChange={(e) => setPageForm({ ...pageForm, featured_image: e.target.value })}
-                          placeholder="https://example.com/image.jpg"
+                          onChange={(url) => setPageForm({ ...pageForm, featured_image: url })}
+                          folder="mauli-cms/pages"
                         />
                       </div>
                       <div className={styles.formGroup} style={{ gridColumn: "1 / -1" }}>
@@ -899,10 +904,11 @@ export default function Dashboard() {
                                     </select>
                                   </div>
                                   <div className={styles.formGroup}>
-                                    <label>Featured Image</label>
-                                    <Input
+                                    <ImageUpload
+                                      label="Featured Image"
                                       value={pageForm.featured_image}
-                                      onChange={(e) => setPageForm({ ...pageForm, featured_image: e.target.value })}
+                                      onChange={(url) => setPageForm({ ...pageForm, featured_image: url })}
+                                      folder="mauli-cms/pages"
                                     />
                                   </div>
                                   <div className={styles.formGroup} style={{ gridColumn: "1 / -1" }}>
