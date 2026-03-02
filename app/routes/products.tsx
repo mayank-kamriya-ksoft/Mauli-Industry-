@@ -1,8 +1,14 @@
 import { Link } from "react-router";
 import { Header } from "~/components/header/header";
 import { Footer } from "~/components/footer/footer";
-import { productCategories } from "~/data/products";
+import { dbService } from "~/lib/services/database";
+import type { Route } from "./+types/products";
 import styles from "./products.module.css";
+
+export async function loader() {
+  const products = await dbService.getProducts();
+  return { products };
+}
 
 export function meta() {
   return [
@@ -14,7 +20,9 @@ export function meta() {
   ];
 }
 
-export default function Products() {
+export default function Products({ loaderData }: Route.ComponentProps) {
+  const { products } = loaderData;
+
   return (
     <div className={styles.container}>
       <Header />
@@ -26,15 +34,19 @@ export default function Products() {
 
       <section className={styles.section}>
         <div className={styles.productsGrid}>
-          {productCategories.map((product) => (
-            <Link key={product.id} to={`/products/${product.id}`} className={styles.productCard}>
-              <img src={product.imageUrl} alt={product.name} className={styles.productImage} />
-              <div className={styles.productContent}>
-                <h3 className={styles.productName}>{product.name}</h3>
-                <p className={styles.productDescription}>{product.description}</p>
-              </div>
-            </Link>
-          ))}
+          {products.length > 0 ? (
+            products.map((product: any) => (
+              <Link key={product.id} to={`/products/${product.id}`} className={styles.productCard}>
+                <img src={product.image_url || ''} alt={product.name} className={styles.productImage} />
+                <div className={styles.productContent}>
+                  <h3 className={styles.productName}>{product.name}</h3>
+                  <p className={styles.productDescription}>{product.description}</p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className={styles.noProducts}>No products available yet.</p>
+          )}
         </div>
       </section>
 
