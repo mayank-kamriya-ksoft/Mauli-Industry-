@@ -5,8 +5,8 @@
 }
 
 .hero {
-  background: linear-gradient(160deg, var(--color-neutral-12) 0%, var(--color-neutral-12) 50%, var(--color-neutral-11) 100%);
-  color: var(--color-neutral-1);
+  background: linear-gradient(160deg, #E37D1B 0%, #d4710f 50%, #c46a0d 100%);
+  color: #ffffff;
   padding: var(--space-9) var(--space-5);
   text-align: center;
   position: relative;
@@ -18,9 +18,8 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 80%, var(--color-brand-9) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, var(--color-brand-9) 0%, transparent 50%);
-  opacity: 0.06;
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0,0,0,0.1) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -38,7 +37,7 @@
   line-height: 1.08;
   letter-spacing: -0.025em;
   margin-bottom: var(--space-4);
-  color: var(--color-neutral-1);
+  color: #ffffff;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -49,7 +48,7 @@
   line-height: 1.35;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-3);
-  color: var(--color-brand-9);
+  color: #E37D1B;
   opacity: 0.92;
 }
 
@@ -60,7 +59,7 @@
   line-height: 1.75;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-7);
-  color: var(--color-neutral-5);
+  color: rgba(255,255,255,0.85);
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
@@ -73,14 +72,25 @@
   flex-wrap: wrap;
 }
 
+.heroButtons a:first-child {
+  background-color: #3b5fe0;
+  color: #ffffff;
+  border: none;
+}
+
+.heroButtons a:first-child:hover {
+  background-color: #2d4ec4;
+}
+
 .heroButtons a[class*="outline"] {
-  color: var(--color-neutral-1);
-  border-color: var(--color-neutral-6);
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.4);
+  background-color: rgba(255,255,255,0.1);
 }
 
 .heroButtons a[class*="outline"]:hover {
-  background-color: rgba(255,255,255,0.1);
-  color: var(--color-neutral-1);
+  background-color: rgba(255,255,255,0.2);
+  color: #ffffff;
 }
 
 .section {
