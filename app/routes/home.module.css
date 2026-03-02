@@ -5,8 +5,10 @@
 }
 
 .hero {
-  background: linear-gradient(160deg, #1c2024 0%, #1c2024 50%, #2a2d32 100%);
-  color: #ffffff;
+   background: light-dark(
+    linear-gradient(160deg, #E37D1B 0%, #d4710f 50%, #c46a0d 100%),
+    linear-gradient(160deg, #1c2024 0%, #1c2024 50%, #2a2d32 100%)
+  );
   padding: var(--space-9) var(--space-5);
   text-align: center;
   position: relative;
