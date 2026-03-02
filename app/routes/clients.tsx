@@ -20,7 +20,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Clients({ loaderData }: Route.ComponentProps) {
-  const { clients } = loaderData;
+  const clients = [...loaderData.clients].sort((a: any, b: any) =>
+    a.name.localeCompare(b.name)
+  );
 
   return (
     <div className={styles.container}>
