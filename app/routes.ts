@@ -9,6 +9,7 @@ export default [
   route("services", "routes/services.tsx"),
   route("clients", "routes/clients.tsx"),
   route("contact", "routes/contact.tsx"),
+  route("infrastructure", "routes/infrastructure.tsx"),
   route("admin", "routes/admin.tsx"), // Redirects to /admin/login
   route("admin/login", "routes/admin/login.tsx"),
   route("admin/dashboard", "routes/admin/dashboard.tsx"),
