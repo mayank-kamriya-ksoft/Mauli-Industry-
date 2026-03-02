@@ -41,8 +41,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>{homePage?.title || "Precision Engineering for Steel & Rolling Mill Industries"}</h1>
-          <p className={styles.heroSubtitle}>{company.tagline}</p>
+          <h1 className={styles.heroTitle}>{homePage?.title || "Precision Engineering for Steel, Pharmaceutical, Automotive, and Food Processing."}</h1>
           <p className={styles.heroDescription}>
             {homePage?.content ? extractTextFromHtml(homePage.content) : "With 20+ years of experience, we deliver reliable, high-quality industrial components tailored to your requirements. From design to delivery, we are your trusted partner in precision manufacturing."}
           </p>

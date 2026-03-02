@@ -5,8 +5,8 @@
 }
 
 .hero {
-  background: linear-gradient(160deg, var(--color-neutral-12) 0%, var(--color-neutral-12) 50%, var(--color-neutral-11) 100%);
-  color: var(--color-neutral-1);
+  background: linear-gradient(160deg, #1c2024 0%, #1c2024 50%, #2a2d32 100%);
+  color: #ffffff;
   padding: var(--space-9) var(--space-5);
   text-align: center;
   position: relative;
@@ -18,8 +18,8 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 80%, var(--color-brand-9) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, var(--color-brand-9) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, #E37D1B 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, #E37D1B 0%, transparent 50%);
   opacity: 0.06;
   pointer-events: none;
 }
@@ -38,7 +38,7 @@
   line-height: 1.08;
   letter-spacing: -0.025em;
   margin-bottom: var(--space-4);
-  color: var(--color-neutral-1);
+  color: #ffffff;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -49,7 +49,7 @@
   line-height: 1.35;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-3);
-  color: var(--color-brand-9);
+  color: #E37D1B;
   opacity: 0.92;
 }
 
@@ -60,7 +60,7 @@
   line-height: 1.75;
   letter-spacing: 0.01em;
   margin-bottom: var(--space-7);
-  color: var(--color-neutral-5);
+  color: #b0b4ba;
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
@@ -74,13 +74,13 @@
 }
 
 .heroButtons a[class*="outline"] {
-  color: var(--color-neutral-1);
-  border-color: var(--color-neutral-6);
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.25);
 }
 
 .heroButtons a[class*="outline"]:hover {
   background-color: rgba(255,255,255,0.1);
-  color: var(--color-neutral-1);
+  color: #ffffff;
 }
 
 .section {
