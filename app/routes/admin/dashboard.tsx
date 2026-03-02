@@ -83,24 +83,48 @@ export default function Dashboard() {
   };
 
   const handleSaveProduct = (id: string) => {
+    if (!productForm.image.trim()) {
+      alert("Product image is required. Please upload an image before saving.");
+      return;
+    }
     updateProduct(id, productForm);
     setEditingProductId(null);
     setProductForm({ name: "", description: "", image: "", category: "" });
   };
 
   const handleAddProduct = () => {
+    if (!productForm.name.trim()) {
+      alert("Product name is required.");
+      return;
+    }
+    if (!productForm.image.trim()) {
+      alert("Product image is required. Please upload an image before adding.");
+      return;
+    }
     addProduct(productForm);
     setAddingProduct(false);
     setProductForm({ name: "", description: "", image: "", category: "" });
   };
 
   const handleSaveClient = (id: string) => {
+    if (!clientForm.logo.trim()) {
+      alert("Client logo is required. Please upload a logo before saving.");
+      return;
+    }
     updateClient(id, clientForm);
     setEditingClientId(null);
     setClientForm({ name: "", logo: "" });
   };
 
   const handleAddClient = () => {
+    if (!clientForm.name.trim()) {
+      alert("Client name is required.");
+      return;
+    }
+    if (!clientForm.logo.trim()) {
+      alert("Client logo is required. Please upload a logo before adding.");
+      return;
+    }
     addClient(clientForm);
     setAddingClient(false);
     setClientForm({ name: "", logo: "" });
