@@ -25,7 +25,8 @@ const DEFAULT_WIDGETS = [
         { label: "Products", url: "/products" },
         { label: "Services", url: "/services" },
         { label: "Clients", url: "/clients" },
-        { label: "Contact", url: "/contact" }
+        { label: "Contact", url: "/contact" },
+        { label: "Infrastructure", url: "/infrastructure" }
       ]
     },
     order: 1,
