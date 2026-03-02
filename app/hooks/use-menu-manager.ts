@@ -54,7 +54,18 @@ export function useMenuManager() {
     const stored = localStorage.getItem("menus");
     if (stored) {
       try {
-        setMenus(JSON.parse(stored));
+        const parsed: Menu[] = JSON.parse(stored);
+        // Merge any new default menu items that don't exist in stored menus
+        const merged = parsed.map(menu => {
+          const defaultMenu = DEFAULT_MENUS.find(d => d.location === menu.location);
+          if (!defaultMenu) return menu;
+          const existingUrls = new Set(menu.items.map(i => i.url));
+          const newItems = defaultMenu.items.filter(i => !existingUrls.has(i.url));
+          if (newItems.length === 0) return menu;
+          return { ...menu, items: [...menu.items, ...newItems] };
+        });
+        setMenus(merged);
+        localStorage.setItem("menus", JSON.stringify(merged));
       } catch {
         setMenus(DEFAULT_MENUS);
       }
