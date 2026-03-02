@@ -5,7 +5,7 @@ import { Footer } from "~/components/footer/footer";
 import { HtmlContent } from "~/components/html-content/html-content";
 import { dbService } from "~/lib/services/database";
 import styles from "./page.module.css";
-
+ 
 export async function loader({ params }: LoaderFunctionArgs) {
   const slug = params.slug;
   if (!slug) {
