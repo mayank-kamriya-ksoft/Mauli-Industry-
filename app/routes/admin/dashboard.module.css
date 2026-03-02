@@ -173,7 +173,7 @@
 }
 
 .header {
-  background: white;
+  background: var(--color-neutral-1);
   border-bottom: 1px solid var(--color-neutral-6);
   padding: var(--space-6) var(--space-8);
   display: flex;
@@ -244,7 +244,7 @@
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-5);
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   transition: all 0.2s ease;
@@ -318,7 +318,7 @@
 }
 
 .quickActions {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-5);
@@ -351,7 +351,7 @@
 }
 
 .recentActivity {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-5);
@@ -413,7 +413,7 @@
 }
 
 .siteHealth {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-5);
@@ -454,7 +454,7 @@
 }
 
 .analytics {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-5);
@@ -521,7 +521,7 @@
 
 /* Edit Card */
 .editCard {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-6);
@@ -598,7 +598,7 @@
 }
 
 .itemCard {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   padding: var(--space-5);
@@ -659,7 +659,7 @@
 
 /* Pages Table - WordPress Style */
 .pagesTableCard {
-  background: white;
+  background: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-6);
   border-radius: var(--radius-3);
   overflow: hidden;
@@ -699,7 +699,7 @@
 }
 
 .pagesTable {
-  background: white;
+  background: var(--color-neutral-1);
 }
 
 .tableHeader {
@@ -715,7 +715,7 @@
 .tableBody {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: var(--color-neutral-1);
 }
 
 .tableRow {
