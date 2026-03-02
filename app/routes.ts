@@ -21,4 +21,6 @@ export default [
   route("api/pages", "routes/api/pages.tsx"),
   route("api/pages/:id", "routes/api/pages.$id.tsx"),
   route("api/auth/login", "routes/api/auth.login.tsx"),
+  // Dynamic CMS pages (catch-all - must be last)
+  route(":slug", "routes/page.tsx"),
 ] satisfies RouteConfig;

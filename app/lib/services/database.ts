@@ -686,6 +686,53 @@ export class DatabaseService {
     throw new NotFoundError("Page", id);
   }
 
+  async getPageBySlug(slug: string): Promise<Page | null> {
+    if (this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from("pages")
+          .select("*")
+          .eq("slug", slug)
+          .eq("status", "published")
+          .maybeSingle();
+
+        if (error) throw new DatabaseError(error.message, error);
+        if (!data) return null;
+
+        return {
+          id: data.id,
+          title: data.title,
+          slug: data.slug,
+          content: data.content || "",
+          status: (data.status as "draft" | "published") || "draft",
+          author: data.author || "",
+          featured_image: data.featured_image || undefined,
+          excerpt: data.excerpt || undefined,
+          created_at: data.created_at,
+          updated_at: data.updated_at,
+        };
+      } catch (error) {
+        if (error instanceof DatabaseError) throw error;
+        console.error("Error fetching page by slug from Supabase:", error);
+      }
+    }
+
+    if (this.pool) {
+      try {
+        const result = await this.pool.query<Page>(
+          "SELECT * FROM pages WHERE slug = $1 AND status = 'published'",
+          [slug]
+        );
+        if (result.rows.length === 0) return null;
+        return result.rows[0];
+      } catch (error) {
+        console.error("Error fetching page by slug from pool:", error);
+      }
+    }
+
+    return null;
+  }
+
   async createPage(page: Omit<Page, "created_at" | "updated_at">): Promise<Page> {
     if (this.supabase) {
       try {
