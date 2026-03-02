@@ -3,6 +3,25 @@ import { getPool } from "../db";
 import type { ProductCategory, Client, CompanyInfo, Page } from "../db";
 import { DatabaseError, NotFoundError } from "../api/errors";
 
+// Simple server-side cache
+const cache = new Map<string, { data: any; expiry: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getCached<T>(key: string): T | null {
+  const entry = cache.get(key);
+  if (entry && Date.now() < entry.expiry) return entry.data as T;
+  cache.delete(key);
+  return null;
+}
+
+function setCache(key: string, data: any) {
+  cache.set(key, { data, expiry: Date.now() + CACHE_TTL });
+}
+
+export function invalidateProductsCache() {
+  cache.delete('products');
+}
+
 // Enhanced database service that uses Supabase when available, falls back to PostgreSQL pool
 export class DatabaseService {
   private supabase = getSupabaseClient();
@@ -10,6 +29,8 @@ export class DatabaseService {
 
   // Products
   async getProducts(): Promise<ProductCategory[]> {
+    const cached = getCached<ProductCategory[]>('products');
+    if (cached) return cached;
     const { productCategories: staticProducts } = await import("~/data/products");
 
     if (this.supabase) {
@@ -21,13 +42,15 @@ export class DatabaseService {
 
         if (error) throw error;
         if (data && data.length > 0) {
-          return (data || []).map((p) => ({
+          const result = (data || []).map((p) => ({
             id: p.id,
             name: p.name,
             description: p.description || "",
             image_url: p.image_url || "",
             created_at: p.created_at,
           }));
+          setCache('products', result);
+          return result;
         }
       } catch (error) {
         console.error("Error fetching products from Supabase:", error);
@@ -40,6 +63,7 @@ export class DatabaseService {
           "SELECT * FROM products ORDER BY created_at ASC"
         );
         if (result.rows.length > 0) {
+          setCache('products', result.rows);
           return result.rows;
         }
       } catch (error) {
@@ -103,6 +127,7 @@ export class DatabaseService {
   }
 
   async createProduct(product: Omit<ProductCategory, "created_at">): Promise<ProductCategory> {
+    invalidateProductsCache();
     if (this.supabase) {
       try {
         const { data, error } = await this.supabase
@@ -149,6 +174,7 @@ export class DatabaseService {
   }
 
   async updateProduct(id: string, updates: Partial<ProductCategory>): Promise<ProductCategory> {
+    invalidateProductsCache();
     if (this.supabase) {
       try {
         const updateData: any = {};
@@ -202,6 +228,7 @@ export class DatabaseService {
   }
 
   async deleteProduct(id: string): Promise<void> {
+    invalidateProductsCache();
     if (this.supabase) {
       const { error } = await this.supabase.from("products").delete().eq("id", id);
       if (error) {
