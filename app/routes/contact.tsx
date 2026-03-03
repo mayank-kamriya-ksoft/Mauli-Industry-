@@ -28,7 +28,11 @@ export async function action({ request }: Route.ActionArgs) {
 
   const success = await sendContactEmail({ name, email, phone, subject, message });
 
-  return { success };
+  if (success) {
+    return { success: true };
+  }
+
+  return { success: false, error: "Failed to send email. Please check your configuration." };
 }
 
 export function meta({}: Route.MetaArgs) {
@@ -149,6 +153,11 @@ export default function Contact({ loaderData, actionData }: Route.ComponentProps
             {actionData?.success && (
               <div style={{ padding: '1rem', backgroundColor: '#dcfce7', color: '#166534', borderRadius: '0.5rem', marginBottom: '1rem' }}>
                 Thank you! Your message has been sent successfully.
+              </div>
+            )}
+            {actionData?.success === false && (
+              <div style={{ padding: '1rem', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '0.5rem', marginBottom: '1rem' }}>
+                {actionData.error || "Something went wrong. Please try again later."}
               </div>
             )}
             <div className={styles.formGrid}>
