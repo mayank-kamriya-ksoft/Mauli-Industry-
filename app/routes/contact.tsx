@@ -1,5 +1,5 @@
 import type { Route } from "./+types/contact";
-import { MapPin, Phone, Mail, Globe } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Loader2 } from "lucide-react";
 import { Header } from "~/components/header/header";
 import { Footer } from "~/components/footer/footer";
 import { dbService } from "~/lib/services/database";
@@ -8,6 +8,7 @@ import { Input } from "~/components/ui/input/input";
 import { Textarea } from "~/components/ui/textarea/textarea";
 import { Label } from "~/components/ui/label/label";
 import { sendContactEmail } from "~/lib/services/email";
+import { Form, useActionData, useNavigation, useSubmit } from "react-router";
 import styles from "./contact.module.css";
 
 export async function loader() {
@@ -28,7 +29,11 @@ export async function action({ request }: Route.ActionArgs) {
 
   const success = await sendContactEmail({ name, email, phone, subject, message });
 
-  return { success };
+  if (success) {
+    return { success: true };
+  }
+
+  return { success: false, error: "Failed to send email. Please check your configuration." };
 }
 
 export function meta({}: Route.MetaArgs) {
@@ -41,9 +46,18 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Contact({ loaderData, actionData }: Route.ComponentProps) {
+export default function Contact({ loaderData }: Route.ComponentProps) {
   const { company, pages } = loaderData;
+  const actionData = useActionData<typeof action>();
+  const navigation = useNavigation();
+  const submit = useSubmit();
+  const isSubmitting = navigation.state === "submitting";
   const contactPage = pages.find((p: any) => p.slug === 'contact' && p.status === 'published');
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submit(event.currentTarget, { method: "post" });
+  };
 
   return (
     <div className={styles.container}>
@@ -145,43 +159,55 @@ export default function Contact({ loaderData, actionData }: Route.ComponentProps
           <h2 className={styles.formTitle}>Send Us a Message</h2>
           <p className={styles.formSubtitle}>Fill out the form below and we'll get back to you soon</p>
           
-          <form className={styles.form} method="post">
+          <Form className={styles.form} method="post" onSubmit={handleSubmit}>
             {actionData?.success && (
               <div style={{ padding: '1rem', backgroundColor: '#dcfce7', color: '#166534', borderRadius: '0.5rem', marginBottom: '1rem' }}>
                 Thank you! Your message has been sent successfully.
               </div>
             )}
+            {actionData?.success === false && (
+              <div style={{ padding: '1rem', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '0.5rem', marginBottom: '1rem' }}>
+                {actionData.error || "Something went wrong. Please try again later."}
+              </div>
+            )}
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
                 <Label htmlFor="name">Name *</Label>
-                <Input id="name" name="name" required placeholder="Your name" />
+                <Input id="name" name="name" required placeholder="Your name" disabled={isSubmitting} autoComplete="name" />
               </div>
               
               <div className={styles.formGroup}>
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="your.email@example.com" />
+                <Input id="email" name="email" type="email" required placeholder="your.email@example.com" disabled={isSubmitting} autoComplete="email" />
               </div>
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="phone">Phone</Label>
-              <Input id="phone" name="phone" type="tel" placeholder="+91 1234567890" />
+              <Input id="phone" name="phone" type="tel" placeholder="+91 1234567890" disabled={isSubmitting} />
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="subject">Subject *</Label>
-              <Input id="subject" name="subject" required placeholder="How can we help?" />
+              <Input id="subject" name="subject" required placeholder="How can we help?" disabled={isSubmitting} />
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="message">Message *</Label>
-              <Textarea id="message" name="message" required placeholder="Tell us more about your requirements..." rows={6} />
+              <Textarea id="message" name="message" required placeholder="Tell us more about your requirements..." rows={6} disabled={isSubmitting} />
             </div>
             
-            <Button type="submit" className={styles.submitButton}>
-              Send Message
+            <Button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </Button>
-          </form>
+          </Form>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import "dotenv/config";
 
 let transporter: nodemailer.Transporter | null = null;
 
