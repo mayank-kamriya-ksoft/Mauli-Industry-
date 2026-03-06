@@ -1,3 +1,4 @@
+import React from "react";
 import type { Route } from "./+types/contact";
 import { MapPin, Phone, Mail, Globe, Loader2 } from "lucide-react";
 import { Header } from "~/components/header/header";
@@ -13,11 +14,11 @@ import { z } from "zod";
 import styles from "./contact.module.css";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   phone: z.string().trim().max(20, "Phone must be less than 20 characters").optional().default(""),
-  subject: z.string().trim().min(1, "Subject is required").max(200, "Subject must be less than 200 characters"),
-  message: z.string().trim().min(1, "Message is required").max(5000, "Message must be less than 5000 characters"),
+  subject: z.string().trim().min(3, "Subject must be at least 3 characters").max(200, "Subject must be less than 200 characters"),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(5000, "Message must be less than 5000 characters"),
 });
 
 export async function loader() {
@@ -73,6 +74,13 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
   const submit = useSubmit();
   const isSubmitting = navigation.state === "submitting";
   const contactPage = pages.find((p: any) => p.slug === 'contact' && p.status === 'published');
+  const formRef = React.useRef<HTMLFormElement>(null);
+
+  React.useEffect(() => {
+    if (actionData?.success) {
+      formRef.current?.reset();
+    }
+  }, [actionData]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -179,7 +187,7 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
           <h2 className={styles.formTitle}>Send Us a Message</h2>
           <p className={styles.formSubtitle}>Fill out the form below and we'll get back to you soon</p>
           
-          <Form className={styles.form} method="post" onSubmit={handleSubmit}>
+          <Form ref={formRef} className={styles.form} method="post" onSubmit={handleSubmit}>
             {actionData?.success && (
               <div style={{ padding: '1rem', backgroundColor: '#dcfce7', color: '#166534', borderRadius: '0.5rem', marginBottom: '1rem' }}>
                 Thank you! Your message has been sent successfully.
