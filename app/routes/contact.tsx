@@ -9,7 +9,16 @@ import { Textarea } from "~/components/ui/textarea/textarea";
 import { Label } from "~/components/ui/label/label";
 import { sendContactEmail } from "~/lib/services/email";
 import { Form, useActionData, useNavigation, useSubmit } from "react-router";
+import { z } from "zod";
 import styles from "./contact.module.css";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().trim().max(20, "Phone must be less than 20 characters").optional().default(""),
+  subject: z.string().trim().min(1, "Subject is required").max(200, "Subject must be less than 200 characters"),
+  message: z.string().trim().min(1, "Message is required").max(5000, "Message must be less than 5000 characters"),
+});
 
 export async function loader() {
   const [company, pages] = await Promise.all([
@@ -21,11 +30,22 @@ export async function loader() {
 
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
-  const subject = formData.get("subject") as string;
-  const message = formData.get("message") as string;
+
+  const raw = {
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    phone: formData.get("phone") as string,
+    subject: formData.get("subject") as string,
+    message: formData.get("message") as string,
+  };
+
+  const result = contactSchema.safeParse(raw);
+  if (!result.success) {
+    const errors = result.error.issues.map((e) => e.message).join(", ");
+    return { success: false, error: errors };
+  }
+
+  const { name, email, phone, subject, message } = result.data;
 
   const success = await sendContactEmail({ name, email, phone, subject, message });
 
@@ -33,7 +53,7 @@ export async function action({ request }: Route.ActionArgs) {
     return { success: true };
   }
 
-  return { success: false, error: "Failed to send email. Please check your configuration." };
+  return { success: false, error: "Failed to send email. Please try again later." };
 }
 
 export function meta({}: Route.MetaArgs) {
