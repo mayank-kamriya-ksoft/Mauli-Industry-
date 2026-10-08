@@ -30,7 +30,8 @@ export const sendContactEmail = async (data: { name: string; email: string; phon
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER, // Send to self
+    to: "info@mauliindustries.co.in",
+    replyTo: data.email,
     subject: `New Contact Form Submission: ${data.subject}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">

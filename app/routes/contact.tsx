@@ -13,12 +13,19 @@ import { Form, useActionData, useNavigation, useSubmit } from "react-router";
 import { z } from "zod";
 import styles from "./contact.module.css";
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+const PHONE_REGEX = /^\+?[0-9\s\-]{10,15}$/;
+const REPEATED_CHARS_REGEX = /(.)\1{4,}/;
+
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().trim().max(20, "Phone must be less than 20 characters").optional().default(""),
-  subject: z.string().trim().min(3, "Subject must be at least 3 characters").max(200, "Subject must be less than 200 characters"),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(5000, "Message must be less than 5000 characters"),
+  email: z.string().trim().email("Invalid email address").regex(EMAIL_REGEX, "Invalid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().trim().max(20, "Phone must be less than 20 characters").regex(PHONE_REGEX, "Invalid phone number").optional().or(z.literal("")).default(""),
+  subject: z.string().trim().min(5, "Subject must be at least 5 characters").max(200, "Subject must be less than 200 characters")
+    .refine((v) => !REPEATED_CHARS_REGEX.test(v), "Please enter a meaningful subject"),
+  message: z.string().trim().min(30, "Message must be at least 30 characters").max(5000, "Message must be less than 5000 characters")
+    .refine((v) => v.split(/\s+/).filter(Boolean).length >= 5, "Message must contain at least 5 words")
+    .refine((v) => !REPEATED_CHARS_REGEX.test(v), "Please enter a meaningful message"),
 });
 
 export async function loader() {
@@ -206,23 +213,23 @@ export default function Contact({ loaderData }: Route.ComponentProps) {
               
               <div className={styles.formGroup}>
                 <Label htmlFor="email">Email *</Label>
-                <Input id="email" name="email" type="email" required placeholder="your.email@example.com" disabled={isSubmitting} autoComplete="email" />
+                <Input id="email" name="email" type="email" required pattern={EMAIL_REGEX.source} title="Please enter a valid email address (e.g. name@company.com)" placeholder="your.email@example.com" disabled={isSubmitting} autoComplete="email" />
               </div>
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="phone">Phone</Label>
-              <Input id="phone" name="phone" type="tel" placeholder="+91 1234567890" disabled={isSubmitting} />
+              <Input id="phone" name="phone" type="tel" pattern={PHONE_REGEX.source} title="Please enter a valid phone number (10-15 digits)" maxLength={20} placeholder="+91 1234567890" disabled={isSubmitting} />
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="subject">Subject *</Label>
-              <Input id="subject" name="subject" required placeholder="How can we help?" disabled={isSubmitting} />
+              <Input id="subject" name="subject" required minLength={5} maxLength={200} placeholder="How can we help?" disabled={isSubmitting} />
             </div>
             
             <div className={styles.formGroup}>
               <Label htmlFor="message">Message *</Label>
-              <Textarea id="message" name="message" required placeholder="Tell us more about your requirements..." rows={6} disabled={isSubmitting} />
+              <Textarea id="message" name="message" required minLength={30} maxLength={5000} placeholder="Tell us more about your requirements..." rows={6} disabled={isSubmitting} />
             </div>
             
             <Button type="submit" className={styles.submitButton} disabled={isSubmitting}>
